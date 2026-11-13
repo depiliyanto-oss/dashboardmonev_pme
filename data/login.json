@@ -1,0 +1,22 @@
+{
+  "updatedAt": "2026-11-07",
+  "note": "Akun kredensial lokal Dashboard CARE-I. Gunakan email/nama dan password untuk masuk.",
+  "users": [
+    {
+      "id": 1,
+      "name": "Administrator",
+      "email": "admin@pme.go.id",
+      "salt": "440d666427f84568fc65792e2d47c110",
+      "iterations": 210000,
+      "passwordHash": "a7fd6a2fb0b6047087c3b3119019a31b95d5831650c365b6581c539f0a48b8b5"
+    },
+    {
+      "id": 2,
+      "name": "Tim Monev P2P",
+      "email": "monev@pme.go.id",
+      "salt": "440d666427f84568fc65792e2d47c110",
+      "iterations": 210000,
+      "passwordHash": "a7fd6a2fb0b6047087c3b3119019a31b95d5831650c365b6581c539f0a48b8b5"
+    }
+  ]
+}
