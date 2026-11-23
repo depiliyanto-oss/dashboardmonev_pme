@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Presentasi alokasi dan realisasi anggaran CARE-I 2026">
+  <title>Presentations | Dasbor Kinerja CARE-I 2026</title>
+
+  <script src="js/auth-config.js"></script>
+  <script>
+    (function () {
+      var cfg = window.PME_AUTH_CONFIG || {};
+      var key = cfg.sessionKey || "pme.auth.v1";
+      var session = null;
+      try {
+        var raw = window.sessionStorage.getItem(key) || window.localStorage.getItem(key);
+        session = raw ? JSON.parse(raw) : null;
+      } catch (error) {}
+      if (session && session.exp && session.exp > Date.now()) return;
+      try {
+        window.sessionStorage.removeItem(key);
+        window.localStorage.removeItem(key);
+      } catch (error) {}
+      var next = window.location.pathname + window.location.search + window.location.hash;
+      window.location.replace((cfg.loginPath || "login.html") + "?next=" + encodeURIComponent(next));
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/images/logos/kemenkes.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-presentation" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M12 17v4M8 21h8"/><path d="m9 11 2 2 4-4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
+  </svg>
+
+  <div class="dashboard-shell">
+    <div class="dashboard-content">
+      <header class="dashboard-topbar" id="topbar">
+        <div class="dashboard-topbar-title">
+          <h1 id="topbarTitle">Presentations &mdash; Alokasi, Realisasi &amp; Capaian CARE-I 2026</h1>
+          <p id="topbarSubtitle">Visualisasi alokasi, capaian realisasi 3 DIPA, dan progress seluruh unit</p>
+        </div>
+
+        <div class="dashboard-topbar-row">
+          <div class="topbar-logos">
+            <img src="assets/images/logos/kemenkes.png" alt="Logo Kemenkes Ditjen P2" title="Kemenkes Ditjen P2">
+            <img src="assets/images/logos/world-bank.png" alt="The World Bank" title="The World Bank">
+            <img src="assets/images/logos/pandemic-fund.png" alt="The Pandemic Fund" title="The Pandemic Fund">
+          </div>
+
+          <div class="topbar-actions">
+            <a class="btn btn-ghost" href="index.html" title="Kembali ke dashboard utama">
+              <svg class="icon"><use href="#i-home"></use></svg>
+              <span>Beranda</span>
+            </a>
+            <a class="btn btn-primary" href="presentations.html" aria-current="page" title="Halaman presentasi">
+              <svg class="icon"><use href="#i-presentation"></use></svg>
+              <span>Presentations</span>
+            </a>
+            <span class="data-pill" title="Periode data terakhir">
+              <svg class="icon"><use href="#i-calendar"></use></svg>
+              <span>Data per <strong id="pvDataAsOf">&mdash;</strong></span>
+            </span>
+            <details class="user-menu" id="topbarUser" hidden>
+              <summary class="user-summary">
+                <span class="user-avatar" id="userAvatar" aria-hidden="true">A</span>
+                <span class="user-text">
+                  <strong id="userName">Administrator</strong>
+                  <small id="userEmail">admin@pme.go.id</small>
+                </span>
+                <svg class="icon user-chevron" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+              </summary>
+              <div class="user-pop">
+                <div class="user-pop-head">
+                  <span class="user-avatar user-avatar-lg" id="userAvatarPop" aria-hidden="true">A</span>
+                  <span class="user-pop-text">
+                    <strong id="userNamePop">Administrator</strong>
+                    <small id="userEmailPop">admin@pme.go.id</small>
+                  </span>
+                </div>
+                <button class="user-logout" id="logoutBtn" type="button">
+                  <svg class="icon"><use href="#i-logout"></use></svg>
+                  <span>Keluar dari dashboard</span>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="section" id="presentations" aria-labelledby="presentationsTitle">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Presentations</span>
+              <h2 id="presentationsTitle">Alokasi, Realisasi &amp; Capaian 2026</h2>
+            </div>
+            <p class="section-note" id="pvCutoff">&mdash;</p>
+          </div>
+
+          <!-- ALokasi 2026 -->
+          <article class="card presentation-card">
+            <div class="card-head">
+              <div>
+                <h3>Alokasi 2026</h3>
+                <p>Alokasi anggaran CARE-I tahun 2026 per DIPA dan unit kerja</p>
+              </div>
+            </div>
+            <div class="presentation-figure">
+              <svg class="presentation-svg alokasi-svg" viewBox="0 0 1408 778" role="img" aria-label="Diagram alokasi anggaran CARE-I tahun 2026">
+                <defs>
+                  <marker id="pvArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                    <path d="M0 0 L10 5 L0 10 z" fill="#16ae97" />
+                  </marker>
+                </defs>
+
+                <text class="pv-title" x="116" y="62">Alokasi Tahun 2026</text>
+                <text class="pv-subtitle" x="116" y="106">CARE-I</text>
+                <text class="pv-brand" x="1152" y="84" text-anchor="end">Kemenkes</text>
+
+                <rect class="pv-dipa-frame" x="180" y="296" width="292" height="364" rx="16" />
+
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M326 224 V286" />
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M452 368 H520 V340 H586" />
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M452 368 H560 V581 H586" />
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M834 340 H888 V233 H946" />
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M834 340 H946" />
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M834 340 H888 V447 H946" />
+                <path class="pv-connector" marker-end="url(#pvArrow)" d="M834 340 H888 V554 H944" />
+
+                <text class="pv-label" x="204" y="164">Alokasi Anggaran</text>
+                <rect x="200" y="168" width="252" height="56" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiTotal" x="326" y="203" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="205" y="337">DIPA P2</text>
+                <rect x="200" y="340" width="252" height="56" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiP2" x="326" y="375" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="204" y="484">DIPA Kesprimkom</text>
+                <rect x="200" y="486" width="252" height="54" fill="#b7b7b7" />
+                <text class="pv-value-dark" id="pvAlokasiKesprimkom" x="326" y="520" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="205" y="584">DIPA Sekjen</text>
+                <rect x="200" y="588" width="252" height="54" fill="#b7b7b7" />
+                <text class="pv-value-dark" id="pvAlokasiSekjen" x="326" y="622" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="598" y="310">Ditjen P2</text>
+                <rect x="582" y="312" width="252" height="56" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiDitjenP2" x="708" y="347" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="598" y="550">K/L</text>
+                <rect x="582" y="554" width="252" height="54" fill="#b7b7b7" />
+                <text class="pv-value-dark" id="pvAlokasiSwakelola" x="708" y="588" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="956" y="204">CPMU</text>
+                <rect x="942" y="206" width="250" height="54" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiCpmu" x="1067" y="241" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="956" y="310">Dit. SKK</text>
+                <rect x="942" y="312" width="250" height="54" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiSkk" x="1067" y="347" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="956" y="417">Dit. PM ISPA</text>
+                <rect x="942" y="420" width="250" height="54" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiIspa" x="1067" y="455" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-label" x="956" y="524">Dit.PM Zoonosis</text>
+                <rect x="940" y="526" width="252" height="56" fill="#898783" />
+                <text class="pv-value" id="pvAlokasiZoonosis" x="1066" y="561" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-note" x="69" y="765">Pelaksanaan Kegiatan di Ditjen P2 dimulai dari Mei 2026,</text>
+              </svg>
+            </div>
+          </article>
+
+          <!-- Realisasi 2026 -->
+          <article class="card presentation-card">
+            <div class="card-head">
+              <div>
+                <h3>Realisasi 2026</h3>
+                <p>Capaian realisasi anggaran 3 DIPA (SP2D)</p>
+              </div>
+            </div>
+            <div class="presentation-figure">
+              <svg class="presentation-svg realisasi-svg" viewBox="0 0 1413 789" role="img" aria-label="Capaian realisasi anggaran 3 DIPA tahun 2026">
+                <text class="pv-title" x="81" y="62">Realisasi Anggaran 3 DIPA (SP2D) Tahun 2026</text>
+                <text class="pv-subtitle" x="79" y="111">CARE-I</text>
+                <text class="pv-brand" x="1153" y="79" text-anchor="end">Kemenkes</text>
+
+                <text class="pv-kpi-label" x="53" y="181">Total Alokasi Anggaran 2026</text>
+                <rect class="pv-kpi-box" x="51" y="188" width="207" height="56" fill="#d2db2f" />
+                <text class="pv-kpi-value-dark" id="pvRealisasiPagu" x="154" y="224" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-kpi-label" x="53" y="285">Total Realisasi Anggaran 2026</text>
+                <rect class="pv-kpi-box" x="50" y="288" width="208" height="56" fill="#007c82" />
+                <text class="pv-kpi-value" id="pvRealisasiRealisasi" x="154" y="324" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-kpi-label" x="53" y="385">Sisa Anggaran 2026</text>
+                <rect class="pv-kpi-box" x="50" y="390" width="208" height="56" fill="#898783" />
+                <text class="pv-kpi-value" id="pvRealisasiSisa" x="154" y="426" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-chart-title" x="430" y="192">Capaian Realisasi Anggaran 3 DIPA (SP2D)</text>
+
+                <text class="pv-bar-label pv-dipa-label" x="547" y="242" text-anchor="end">DIPA P2</text>
+                <text class="pv-bar-label pv-dipa-label" x="547" y="298" text-anchor="end">DIPA Kesprimkom</text>
+                <text class="pv-bar-label pv-dipa-label" x="547" y="358" text-anchor="end">DIPA sekjen</text>
+                <text class="pv-bar-label" x="547" y="418" text-anchor="end">Total</text>
+
+                <rect id="pvBarP2" x="565" y="220" width="0" height="32" fill="#4fc1c9" />
+                <rect id="pvBarKesprimkom" x="565" y="276" width="0" height="36" fill="#4fc1c9" />
+                <rect id="pvBarSekjen" x="565" y="336" width="0" height="36" fill="#4fc1c9" />
+                <rect id="pvBarTotal" x="565" y="396" width="0" height="36" fill="#4fc1c9" />
+
+                <text class="pv-bar-value" id="pvBarP2Value" x="899" y="242" text-anchor="end">&mdash;</text>
+                <text class="pv-bar-value" id="pvBarKesprimkomValue" x="899" y="298" text-anchor="end">&mdash;</text>
+                <text class="pv-bar-value" id="pvBarSekjenValue" x="899" y="358" text-anchor="end">&mdash;</text>
+                <text class="pv-bar-value" id="pvBarTotalValue" x="899" y="418" text-anchor="end">&mdash;</text>
+
+                <!-- Garis kotak merah pada baris Total: tepi kiri dekat dengan tulisan Total -->
+                <rect class="pv-total-highlight" id="pvTotalHighlight" x="490" y="394" width="637" height="42" rx="2" />
+
+                <text class="pv-axis" x="749" y="464">Capaian (%)</text>
+
+                <!-- Garis merah: mulai dari tepi kanan kotak Total -> kanan -> naik -> berhenti di border putus-putus (tidak masuk ke dalam) -->
+                <path class="pv-capaian-arrow" id="pvCapaianArrow" d="M855 414 H1018 V268 H1117" />
+
+                <!-- Border luar putus-putus, menyelubungi kotak kuning beserta caption-nya -->
+                <rect class="pv-note-frame" x="1117" y="232" width="241" height="180" fill="none" />
+
+                <!-- Border dalam nyambung (solid) -->
+                <rect class="pv-note-box" x="1133" y="248" width="209" height="102" fill="#d2db2f" />
+                <text class="pv-note-value" id="pvTotalCapaian" x="1238" y="310" text-anchor="middle">&mdash;</text>
+                <text class="pv-note-caption" id="pvChartNote" x="1238" y="373" text-anchor="middle">*Capaian realisasi 3 DIPA pada</text>
+                <text class="pv-note-caption" x="1238" y="391" text-anchor="middle">Minggu ke-III 2026</text>
+
+                <rect x="50" y="515" width="1330" height="40" fill="#3d7075" />
+                <text class="pv-th" x="160" y="541" text-anchor="middle">Satker</text>
+                <text class="pv-th" x="399" y="541" text-anchor="middle">Pagu</text>
+                <text class="pv-th" x="663" y="541" text-anchor="middle">Realisasi SP2D</text>
+                <text class="pv-th" x="937" y="541" text-anchor="middle">Sisa</text>
+                <text class="pv-th" x="1228" y="541" text-anchor="middle">Capaian (%)</text>
+
+                <!-- Hanya kolom Satker yang ber-background abu; kolom angka putih polos -->
+                <rect x="50" y="556" width="235" height="28" fill="#c6c5bb" />
+                <rect x="50" y="588" width="235" height="28" fill="#c6c5bb" />
+                <rect x="50" y="620" width="235" height="28" fill="#c6c5bb" />
+                <rect x="50" y="652" width="235" height="28" fill="#c6c5bb" />
+
+                <!-- Garis hitam baris & kolom tabel -->
+                <g class="pv-table-grid">
+                  <path d="M50 515 H1380 M50 555 H1380 M50 586 H1380 M50 618 H1380 M50 650 H1380 M50 680 H1380" />
+                  <path d="M50 515 V680 M285 515 V680 M528 515 V680 M797 515 V680 M1076 515 V680 M1380 515 V680" />
+                </g>
+
+                <text class="pv-td" x="54" y="576">DIPA P2</text>
+                <text class="pv-td pv-td-num" id="pvTablePaguP2" x="393" y="576" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableRealisasiP2" x="664" y="576" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableSisaP2" x="931" y="576" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableCapaianP2" x="1222" y="576" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-td" x="54" y="608">DIPA Kesprimkom</text>
+                <text class="pv-td pv-td-num" id="pvTablePaguKesprimkom" x="393" y="608" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableRealisasiKesprimkom" x="664" y="608" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableSisaKesprimkom" x="931" y="608" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableCapaianKesprimkom" x="1222" y="608" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-td" x="54" y="640">DIPA Sekjen</text>
+                <text class="pv-td pv-td-num" id="pvTablePaguSekjen" x="393" y="640" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableRealisasiSekjen" x="664" y="640" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableSisaSekjen" x="931" y="640" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableCapaianSekjen" x="1222" y="640" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-td" x="54" y="672">Total</text>
+                <text class="pv-td pv-td-num" id="pvTablePaguTotal" x="393" y="672" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableRealisasiTotal" x="664" y="672" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableSisaTotal" x="931" y="672" text-anchor="middle">&mdash;</text>
+                <text class="pv-td pv-td-num" id="pvTableCapaianTotal" x="1222" y="672" text-anchor="middle">&mdash;</text>
+
+                <text class="pv-note" id="pvFootnote" x="65" y="765">&mdash;</text>
+              </svg>
+            </div>
+          </article>
+
+          <!-- Capaian seluruh unit -->
+          <article class="card presentation-card">
+            <div class="card-head">
+              <div>
+                <h3>Capaian Seluruh Unit</h3>
+                <p>Progress capaian realisasi SP2D per unit kerja</p>
+              </div>
+            </div>
+            <div class="pv-filter" role="group" aria-label="Filter capaian">
+              <button type="button" class="pv-filter-btn is-active" data-cap-filter="all">ALL</button>
+              <button type="button" class="pv-filter-btn" data-cap-filter="p2">Dipa P2 - Hanya P2</button>
+              <button type="button" class="pv-filter-btn" data-cap-filter="p2kl">Dipa P2 - K/L</button>
+              <button type="button" class="pv-filter-btn" data-cap-filter="p2all">Dipa P2 - ALL Satker</button>
+              <button type="button" class="pv-filter-btn" data-cap-filter="kesprimkom">Dipa Kesprimkom</button>
+              <button type="button" class="pv-filter-btn" data-cap-filter="sekjen">Dipa Sekjen</button>
+            </div>
+            <div class="presentation-figure">
+              <svg class="presentation-svg capaian-svg" viewBox="0 0 1116 639" role="img" aria-label="Progress capaian realisasi seluruh unit">
+                <g id="pvCapAllView">
+                <g id="pvCapRows">
+                  <!-- Baris 1 -->
+                  <text class="pv-cap-label" id="pvCapLabel1" x="112" y="44" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="30" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar1" x="120" y="30" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue1" x="1024" y="45">&mdash;</text>
+                  <!-- Baris 2 -->
+                  <text class="pv-cap-label" id="pvCapLabel2" x="112" y="87" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="73" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar2" x="120" y="73" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue2" x="1024" y="88">&mdash;</text>
+                  <!-- Baris 3 -->
+                  <text class="pv-cap-label" id="pvCapLabel3" x="112" y="130" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="116" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar3" x="120" y="116" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue3" x="1024" y="131">&mdash;</text>
+                  <!-- Baris 4 -->
+                  <text class="pv-cap-label" id="pvCapLabel4" x="112" y="173" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="159" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar4" x="120" y="159" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue4" x="1024" y="174">&mdash;</text>
+                  <!-- Baris 5 -->
+                  <text class="pv-cap-label" id="pvCapLabel5" x="112" y="216" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="202" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar5" x="120" y="202" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue5" x="1024" y="217">&mdash;</text>
+                  <!-- Baris 6 -->
+                  <text class="pv-cap-label" id="pvCapLabel6" x="112" y="259" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="245" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar6" x="120" y="245" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue6" x="1024" y="260">&mdash;</text>
+                  <!-- Baris 7 -->
+                  <text class="pv-cap-label" id="pvCapLabel7" x="112" y="302" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="288" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar7" x="120" y="288" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue7" x="1024" y="303">&mdash;</text>
+                  <!-- Baris 8 -->
+                  <text class="pv-cap-label" id="pvCapLabel8" x="112" y="345" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="331" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar8" x="120" y="331" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue8" x="1024" y="346">&mdash;</text>
+                  <!-- Baris 9 -->
+                  <text class="pv-cap-label" id="pvCapLabel9" x="112" y="388" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="374" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar9" x="120" y="374" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue9" x="1024" y="389">&mdash;</text>
+                  <!-- Baris 10 -->
+                  <text class="pv-cap-label" id="pvCapLabel10" x="112" y="431" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="417" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar10" x="120" y="417" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue10" x="1024" y="432">&mdash;</text>
+                  <!-- Baris 11 -->
+                  <text class="pv-cap-label" id="pvCapLabel11" x="112" y="474" text-anchor="end">&mdash;</text>
+                  <rect class="pv-cap-track" x="120" y="460" width="896" height="20" />
+                  <rect class="pv-cap-bar" id="pvCapBar11" x="120" y="460" width="0" height="20" />
+                  <text class="pv-cap-value" id="pvCapValue11" x="1024" y="475">&mdash;</text>
+                </g>
+
+                <text class="pv-cap-note pv-cap-note-green" x="253" y="550">&gt;60% relatif tinggi</text>
+                <text class="pv-cap-note pv-cap-note-yellow" x="570" y="550">30% - 60% perlu akselerasi</text>
+                <text class="pv-cap-note pv-cap-note-red" x="893" y="550">&lt;30% prioritas pendalaman</text>
+
+                <text class="pv-cap-note" x="30" y="596">*Berdasarkan angka SAKTI (SP2D) - Cut off per <tspan id="pvCapCutoff">01 Okt 2026</tspan></text>
+                <text class="pv-cap-note" x="30" y="620">**Realisasi Kementerian/Lembaga berdasarkan pencairan SP2D Kontrak Swakelola Tipe II, realisasi real sedang berproses</text>
+                </g>
+
+                <!-- Filter 2 s.d. 6: bar bergaya slide Realisasi 2026 -->
+                <g id="pvCapAltView" class="pv-cap-hidden">
+                  <text class="pv-cap-alt-title" id="pvCapAltTitle" x="30" y="48">Capaian</text>
+                  <g id="pvCapAltRows"></g>
+                  <text class="pv-cap-note" id="pvCapAltNote" x="30" y="610">&mdash;</text>
+                </g>
+              </svg>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <img src="assets/images/logos/kemenkes.png" alt="Logo Kementerian Kesehatan">
+            <div>
+              <strong>CARE-I Project</strong>
+              <span>Kementerian Kesehatan RI &middot; Direktorat Jenderal P2</span>
+            </div>
+          </div>
+          <p class="footer-note">
+            Angka pada halaman ini bersumber dari data utama dashboard (spreadsheet) yang tersinkron di <code>js/monev-data.js</code>.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/monev-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/presentations.js"></script>
+</body>
+</html>

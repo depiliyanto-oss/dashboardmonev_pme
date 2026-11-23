@@ -4655,3 +4655,352 @@ button.side-nav-link {
     print-color-adjust: exact;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Presentations figures (Alokasi 2026 & Realisasi 2026)
+   -------------------------------------------------------------------------- */
+
+.presentation-card .card-head p {
+  margin-top: 4px;
+}
+
+.presentation-figure {
+  width: 100%;
+  margin-top: 16px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(15, 76, 71, 0.08);
+  border-radius: 12px;
+}
+
+.presentation-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.presentation-svg text {
+  font-family: var(--font);
+}
+
+.presentation-svg .pv-title {
+  font-size: 30px;
+  font-weight: 800;
+  fill: #334155;
+}
+
+.presentation-svg .pv-subtitle {
+  font-size: 26px;
+  font-weight: 700;
+  fill: #0f766e;
+}
+
+.presentation-svg .pv-brand {
+  font-size: 22px;
+  font-weight: 700;
+  fill: #0f766e;
+}
+
+.presentation-svg .pv-label,
+.presentation-svg .pv-kpi-label {
+  font-size: 21px;
+  font-weight: 600;
+  fill: #334155;
+}
+
+.presentation-svg .pv-value,
+.presentation-svg .pv-kpi-value {
+  font-size: 31px;
+  font-weight: 800;
+  fill: #fff;
+}
+
+.presentation-svg .pv-value-dark,
+.presentation-svg .pv-kpi-value-dark {
+  font-size: 31px;
+  font-weight: 800;
+  fill: #134e4a;
+}
+
+.presentation-svg .pv-connector {
+  fill: none;
+  stroke: #28b3a9;
+  stroke-width: 2;
+}
+
+.presentation-svg .pv-note {
+  font-size: 19px;
+  fill: #475569;
+}
+
+.presentation-svg .pv-chart-title {
+  font-size: 24px;
+  font-weight: 700;
+  fill: #334155;
+}
+
+.presentation-svg .pv-bar-label {
+  font-size: 22px;
+  font-weight: 600;
+  fill: #334155;
+}
+
+.presentation-svg .pv-bar-value {
+  font-size: 22px;
+  font-weight: 800;
+  fill: #0f766e;
+}
+
+.presentation-svg .pv-axis {
+  font-size: 21px;
+  font-weight: 600;
+  fill: #475569;
+}
+
+.presentation-svg .pv-th {
+  font-size: 18px;
+  font-weight: 700;
+  fill: #fff;
+}
+
+.presentation-svg .pv-td {
+  font-size: 18px;
+  font-weight: 600;
+  fill: #1f2937;
+}
+
+/* Alokasi 2026 — green bold labels, arrows and dashed 3 DIPA frame */
+.alokasi-svg .pv-title,
+.alokasi-svg .pv-subtitle,
+.alokasi-svg .pv-brand,
+.alokasi-svg .pv-label,
+.alokasi-svg .pv-note {
+  fill: #065f46;
+  font-weight: 800;
+}
+
+.alokasi-svg .pv-value,
+.alokasi-svg .pv-value-dark {
+  fill: #ffffff;
+  font-weight: 800;
+}
+
+.alokasi-svg .pv-dipa-frame {
+  fill: none;
+  stroke: #16ae97;
+  stroke-width: 4;
+  stroke-dasharray: 14 10;
+}
+
+.alokasi-svg .pv-frame-label {
+  font-size: 22px;
+  font-weight: 800;
+  fill: #065f46;
+}
+
+.alokasi-svg .pv-connector {
+  stroke: #16ae97;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Realisasi 2026 — same green bold typography as Alokasi */
+.realisasi-svg .pv-title,
+.realisasi-svg .pv-subtitle,
+.realisasi-svg .pv-brand,
+.realisasi-svg .pv-kpi-label,
+.realisasi-svg .pv-chart-title,
+.realisasi-svg .pv-bar-label,
+.realisasi-svg .pv-axis,
+.realisasi-svg .pv-note-caption {
+  fill: #065f46;
+  font-weight: 800;
+}
+
+.realisasi-svg .pv-kpi-value {
+  fill: #ffffff;
+  font-weight: 800;
+}
+
+.realisasi-svg .pv-kpi-value-dark,
+.realisasi-svg .pv-note-value {
+  fill: #065f46;
+  font-weight: 800;
+}
+
+.realisasi-svg .pv-bar-value {
+  fill: #000000;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.realisasi-svg .pv-note-value {
+  fill: #065f46;
+  font-size: 40px;
+}
+
+.realisasi-svg .pv-note-caption {
+  font-size: 15px;
+}
+
+/* Border kotak KPI dibuat tipis */
+.realisasi-svg .pv-kpi-box {
+  stroke: #16ae97;
+  stroke-width: 2;
+}
+
+/* Border kotak capaian nyambung (solid), tipis */
+.realisasi-svg .pv-note-box {
+  stroke: #16ae97;
+  stroke-width: 2;
+}
+
+/* Border luar putus-putus di sekeliling kotak capaian + caption */
+.realisasi-svg .pv-note-frame {
+  stroke: #16ae97;
+  stroke-width: 2;
+  stroke-dasharray: 12 9;
+}
+
+.realisasi-svg .pv-capaian-arrow {
+  fill: none;
+  stroke: #c00000;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.realisasi-svg .pv-th {
+  fill: #ffffff;
+  font-weight: 800;
+}
+
+.realisasi-svg .pv-td {
+  fill: #000000;
+  font-weight: 800;
+}
+
+/* Angka pada kolom Pagu / Realisasi SP2D / Sisa / Capaian: hitam, tidak bold */
+.realisasi-svg .pv-td-num {
+  font-weight: 400;
+}
+
+.realisasi-svg .pv-bar-label {
+  font-size: 21px;
+}
+
+/* Label 3 DIPA: hitam, 2px lebih kecil */
+.realisasi-svg .pv-bar-label.pv-dipa-label {
+  fill: #000000;
+  font-size: 19px;
+}
+
+.realisasi-svg .pv-total-highlight {
+  fill: none;
+  stroke: #c00000;
+  stroke-width: 3;
+}
+
+/* Filter capaian */
+.pv-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pv-filter-btn {
+  appearance: none;
+  border: 1px solid rgba(6, 95, 70, 0.25);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #065f46;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pv-filter-btn:hover {
+  background: #e7f5ef;
+  border-color: #16ae97;
+}
+
+.pv-filter-btn.is-active {
+  background: #065f46;
+  border-color: #065f46;
+  color: #ffffff;
+}
+
+/* Capaian seluruh unit — progress bar */
+.capaian-svg .pv-cap-hidden { display: none; }
+
+.capaian-svg .pv-cap-alt-title {
+  font-size: 24px;
+  font-weight: 800;
+  fill: #065f46;
+}
+
+.capaian-svg .pv-cap-alt-label {
+  font-size: 19px;
+  font-weight: 600;
+  fill: #000000;
+  text-anchor: end;
+}
+
+.capaian-svg .pv-cap-alt-bar { fill: #4fc1c9; }
+
+.capaian-svg .pv-cap-alt-total-box {
+  fill: none;
+  stroke: #c00000;
+  stroke-width: 3;
+}
+
+.capaian-svg .pv-cap-alt-label-total {
+  font-weight: 800;
+}
+
+.capaian-svg .pv-cap-alt-value {
+  font-size: 16px;
+  font-weight: 400;
+  fill: #000000;
+  text-anchor: end;
+}
+
+.capaian-svg .pv-cap-label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #334155;
+}
+
+.capaian-svg .pv-cap-track {
+  fill: #e8edf0;
+}
+
+.capaian-svg .pv-cap-bar-green { fill: #4b842f; }
+.capaian-svg .pv-cap-bar-yellow { fill: #e0a500; }
+.capaian-svg .pv-cap-bar-red { fill: #ed1717; }
+
+.capaian-svg .pv-cap-value {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #000000;
+}
+
+.capaian-svg .pv-cap-note {
+  font-size: 12px;
+  fill: #475569;
+}
+
+.capaian-svg .pv-cap-note-green { fill: #4b842f; font-weight: 700; }
+.capaian-svg .pv-cap-note-yellow { fill: #e0a500; font-weight: 700; }
+.capaian-svg .pv-cap-note-red { fill: #ed1717; font-weight: 700; }
+
+.realisasi-svg .pv-table-grid path {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 1.5;
+}
