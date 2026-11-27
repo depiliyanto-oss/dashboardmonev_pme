@@ -32,7 +32,7 @@ window.MONEV_DATA = {
       "Kemenhut"
     ],
     "source": "Google Sheets CARE-I",
-    "syncedAt": "26 Nov 2026 01:38"
+    "syncedAt": "27 Nov 2026 01:32"
   },
   "totals": {
     "pagu": 79894446000.0,
